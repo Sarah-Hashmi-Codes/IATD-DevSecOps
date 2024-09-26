@@ -1,7 +1,7 @@
 import requests
 
 user_error_message = "Username does not exist"
-password_error_message = "Password is not correct for the given username."
+password_error_message = "Password is not correct for the given username. Week 2 Completed!"
 
 users_list = ["name1", "name2", "name3", "name4", "name5","admin"]
 pass_list = ["pass1", "pass2", "pass3", "pass4", "pass5","admin"]
