@@ -192,8 +192,8 @@ jobs:
             echo "All security gates passed"
             
   build:
+    needs: []
     if: true
-    needs: [sonarqube,dast]
     permissions:
       id-token: write    
     runs-on: ubuntu-latest
@@ -213,6 +213,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
+          sbom: true
+          provenance: true
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest
           
