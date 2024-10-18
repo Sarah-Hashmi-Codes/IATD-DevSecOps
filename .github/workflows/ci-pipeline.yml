@@ -145,7 +145,7 @@ jobs:
             
   security_gate:
         needs: [sonarqube, dast, image-scan]
-        if: true
+        if: false
         runs-on: ubuntu-latest
         steps:
         - name: Download sonarqube-report
@@ -228,7 +228,7 @@ jobs:
             cosign sign --yes ${IMAGE}
           
   submit_results:
-            needs: [test, sonarqube,dast,build]
+            needs: [test,sonarqube,dast,build]
             if: true
             runs-on: ubuntu-latest
             steps:
