@@ -192,7 +192,7 @@ jobs:
             echo "All security gates passed"
             
   build:
-    needs: []
+    # needs: [security_gate]
     if: true
     permissions:
       id-token: write    
@@ -217,6 +217,15 @@ jobs:
           provenance: true
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest
+
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3.4.0
+  
+      - name: Sign the images with GitHub OIDC Token
+        env:
+            IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest
+        run: |
+            cosign sign --yes ${IMAGE}
           
   submit_results:
             needs: [test, sonarqube,dast,build]
